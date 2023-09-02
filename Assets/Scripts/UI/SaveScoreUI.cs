@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace KingOfHill
 {
-    public class SaveScoreUI : MonoBehaviour
+    public class SaveScoreUI : AdvancedUI
     {
         public Action<string> OnEnterName;
         [SerializeField]
@@ -21,11 +21,6 @@ namespace KingOfHill
                 OnEnterName?.Invoke(_inputField.text);
                 SetActive(false);
             });
-        }
-
-        private void SetActive(bool active)
-        {
-            gameObject.SetActive(active);
         }
     }
 } 

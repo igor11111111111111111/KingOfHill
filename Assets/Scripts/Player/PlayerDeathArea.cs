@@ -2,7 +2,7 @@
 
 namespace KingOfHill
 {
-    public class DeathArea : MonoBehaviour
+    public class PlayerDeathArea : MonoBehaviour
     {
 
     }

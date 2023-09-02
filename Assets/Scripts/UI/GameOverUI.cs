@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace KingOfHill
 {
-    public class GameOverUI : MonoBehaviour
+    public class GameOverUI : AdvancedUI
     {
         [SerializeField]
         private Button _restart;
@@ -22,12 +22,7 @@ namespace KingOfHill
                 SetActive(true);
             };
 
-            _restart.onClick.AddListener(()=> SceneManager.LoadScene("Game"));
-        }
-
-        private void SetActive(bool active)
-        {
-            gameObject.SetActive(active);
+            _restart.onClick.AddListener(()=> new SceneChanger(Scenes.Game));
         }
     }
 } 

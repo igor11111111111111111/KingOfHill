@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace KingOfHill
 {
-    public class AllPlayersScoreUI : MonoBehaviour
+    public class AllPlayersScoreUI : AdvancedUI
     {
         [SerializeField]
         private PlayerScoreCell _playerScoreCellPrefab;
@@ -17,7 +17,7 @@ namespace KingOfHill
         public void Init()
         {
             SetActive(false);
-            _restart.onClick.AddListener(() => SceneManager.LoadScene("Game"));
+            _restart.onClick.AddListener(() => new SceneChanger(Scenes.Game));
         }
 
         public void Show(ScoreSaveData scoreSaveData)
@@ -29,11 +29,6 @@ namespace KingOfHill
                     .Init(data);
             }
             SetActive(true);
-        }
-
-        private void SetActive(bool active)
-        {
-            gameObject.SetActive(active);
         }
     }
 } 

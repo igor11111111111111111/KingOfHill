@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace KingOfHill
 {
-    public class Stairs : MonoBehaviour
+    public class MoveStairsSystem : MonoBehaviour
     {
         [SerializeField]
         private Rung _rungPrefab;

@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace KingOfHill
 {
-    public class MobileInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+    public class MobileInputSystem : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IInputSystem
     {
-        public Action<Vector2> OnMove;
+        public Action<Vector2> OnMove { get; set; }
         private Vector2 _startPosition;
         private Vector2 _endPosition;
         private float _minDistance = 30;

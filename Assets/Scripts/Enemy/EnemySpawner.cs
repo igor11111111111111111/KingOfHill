@@ -7,12 +7,12 @@ namespace KingOfHill
     {
         private EnemyPool _enemyPool;
         private float _cdTime;
-        private Player _player;
+        private Transform _target;
 
-        public EnemySpawner Init(EnemyPool enemyPool, Player player)
+        public EnemySpawner Init(EnemyPool enemyPool, Transform target)
         {
             _enemyPool = enemyPool;
-            _player = player;
+            _target = target;
             _cdTime = 2f;
             return this;
         }
@@ -26,9 +26,9 @@ namespace KingOfHill
         {
             while (true)
             {
-                if (_player == null)
+                if (_target == null)
                     break;
-                _enemyPool.Get().Init(_player.transform);
+                _enemyPool.Get().Init(_target);
                 yield return new WaitForSeconds(_cdTime);
             }
         }

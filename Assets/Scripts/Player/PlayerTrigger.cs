@@ -4,20 +4,13 @@ using UnityEngine;
 namespace KingOfHill
 {
     public class PlayerTrigger : MonoBehaviour
-    {
+    { 
         public Action OnGameOver;
         public Action OnLandedNewRung;
-        private Rigidbody _rigidbody;
         public bool IsGrounded => _isGrounded;
         private bool _isGrounded;
         private Rung _oldRung;
 
-        public PlayerTrigger Init(Rigidbody rigidbody)
-        {
-            _rigidbody = rigidbody;
-
-            return this;
-        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -32,7 +25,7 @@ namespace KingOfHill
                 _oldRung = trigger;
             }
 
-            if (other.TryGetComponent(out DeathArea area) || 
+            if (other.TryGetComponent(out PlayerDeathArea area) || 
                 other.TryGetComponent(out Enemy enemy))
             {
                 OnGameOver?.Invoke();

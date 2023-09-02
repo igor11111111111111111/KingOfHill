@@ -10,17 +10,16 @@ namespace KingOfHill
         public PlayerTrigger Trigger => _trigger;
         private PlayerTrigger _trigger;
 
-        public Player Init(MobileInput input)
+        public Player Init(IInputSystem inputSystem)
         {
             _rigidbody = GetComponent<Rigidbody>();
 
             _trigger = gameObject
-                .AddComponent<PlayerTrigger>()
-                .Init(_rigidbody);
+                .AddComponent<PlayerTrigger>();
 
             gameObject
                 .AddComponent<PlayerMoveSystem>()
-                .Init(input, _rigidbody, _trigger);
+                .Init(inputSystem, _rigidbody, _trigger);
 
             _trigger.OnGameOver += () =>
             {

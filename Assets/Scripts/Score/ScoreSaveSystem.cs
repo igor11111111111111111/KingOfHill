@@ -6,29 +6,35 @@ namespace KingOfHill
 {
     public class ScoreSaveSystem
     {
-        public ScoreSaveSystem(SaveScoreUI scoreUI, AllPlayersScoreUI allPlayersScoreUI, ScoreData data)
+        public ScoreSaveSystem(UI ui, ScoreData data)
         {
-            scoreUI.OnEnterName += (name) =>
+            ui.SaveScoreUI.OnEnterName += (name) =>
             {
                 var json = new Json();
                 var saveData = json.Load<ScoreSaveData>();
                 if (saveData== null)
                 {
-                    saveData = new ScoreSaveData();
-                    saveData.List = new List<NameScoreData>()
-                    {
-                        new NameScoreData("Vasya", 23),
-                        new NameScoreData("Petya", 1),
-                        new NameScoreData("Natasha", 500),
-                        new NameScoreData("Nikita", 999),
-                        new NameScoreData("Maksim", 4)
-                    };
+                    CreateRecordHolders();
                 }
                 saveData.List.Add(new NameScoreData(name, data.Value));
                 json.Save(saveData);
 
-                allPlayersScoreUI.Show(saveData);
+                ui.AllPlayersScoreUI.Show(saveData);
             };
+        }
+
+        private ScoreSaveData CreateRecordHolders()
+        {
+            var saveData = new ScoreSaveData();
+            saveData.List = new List<NameScoreData>()
+            {
+                new NameScoreData("Vasya", 23),
+                new NameScoreData("Petya", 1),
+                new NameScoreData("Natasha", 500),
+                new NameScoreData("Nikita", 999),
+                new NameScoreData("Maksim", 4)
+            };
+            return saveData;
         }
     }
 } 

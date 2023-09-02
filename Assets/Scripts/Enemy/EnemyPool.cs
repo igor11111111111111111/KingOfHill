@@ -9,9 +9,9 @@ namespace KingOfHill
         private List<Enemy> _enemys;
         private Enemy _prefab;
         private Transform _parent;
-        private Stairs _stairs;
+        private MoveStairsSystem _stairs;
 
-        public EnemyPool(Enemy prefab, int size, Transform parent, Stairs stairs)
+        public EnemyPool(Enemy prefab, int size, Transform parent, MoveStairsSystem stairs)
         {
             _enemys = new List<Enemy>();
             _prefab = prefab;

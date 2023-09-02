@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace KingOfHill
 {
-    public class EnemyDeathArea : DeathArea
+    public class EnemyDeathArea : MonoBehaviour
     {
-        public void Init(PlayerTrigger trigger, Stairs stairs)
+        public void Init(PlayerTrigger trigger, MoveStairsSystem stairs)
         {
             trigger.OnLandedNewRung += () =>
             {

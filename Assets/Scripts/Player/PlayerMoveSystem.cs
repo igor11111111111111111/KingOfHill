@@ -9,7 +9,7 @@ namespace KingOfHill
         private Rigidbody _rigidbody;
         private PlayerTrigger _trigger;
 
-        public void Init(MobileInput input, Rigidbody rigidbody, PlayerTrigger trigger)
+        public void Init(IInputSystem inputSystem, Rigidbody rigidbody, PlayerTrigger trigger)
         {
             _rigidbody = rigidbody;
             _trigger = trigger;
@@ -19,7 +19,7 @@ namespace KingOfHill
                 _rigidbody.velocity = Vector3.zero;
                 transform.position = new Vector3(Mathf.RoundToInt(transform.position.x), transform.position.y, transform.position.z);
             };
-            input.OnMove += Move;
+            inputSystem.OnMove += Move;
         }
 
         private void Move(Vector2 direction)
