@@ -18,12 +18,20 @@ namespace KingOfHill
 
         [SerializeField]
         private GameOverUI _gameOverUI;
+        [SerializeField]
+        private MenuUI _menuUI;
+        [SerializeField]
+        private SettingsUI _settingsUI;
 
         public void Init(PlayerTrigger trigger, ScoreData scoreData)
         {
             _gameOverUI.Init(trigger, scoreData);
-            _saveScoreUI.Init();
-            _allPlayersScoreUI.Init();
+            _saveScoreUI.Init(_gameOverUI);
+            _allPlayersScoreUI.Init(_saveScoreUI);
+            _settingsUI.Init(_menuUI);
+            _menuUI.Init(_settingsUI);
+
+            GetComponent<UISoundSystem>().Init(trigger);
         }
     } 
 }

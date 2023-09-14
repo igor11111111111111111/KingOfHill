@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 namespace KingOfHill
 {
@@ -9,7 +10,16 @@ namespace KingOfHill
         [SerializeField]
         private Rigidbody _rigidbody;
 
-        public void Init(Transform target)
+        public void Init()
+        {
+            var collisionChecker = gameObject.AddComponent<CollisionChecker>();
+            var audioSource = GetComponent<AudioSource>();
+            new EnemySoundSystem(audioSource, collisionChecker);
+
+            gameObject.SetActive(false);
+        }
+
+        public void SetStartParameters(Transform target)
         {
             var direction = -transform.position + target.position;
             _rigidbody.velocity = direction ;

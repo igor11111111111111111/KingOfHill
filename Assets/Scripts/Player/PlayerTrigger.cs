@@ -7,10 +7,10 @@ namespace KingOfHill
     { 
         public Action OnGameOver;
         public Action OnLandedNewRung;
+        public Action OnCollision;
         public bool IsGrounded => _isGrounded;
         private bool _isGrounded;
         private Rung _oldRung;
-
 
         private void OnTriggerEnter(Collider other)
         {
@@ -29,7 +29,10 @@ namespace KingOfHill
                 other.TryGetComponent(out Enemy enemy))
             {
                 OnGameOver?.Invoke();
+                return;
             }
+
+            OnCollision?.Invoke();
         }
 
         private void OnTriggerExit(Collider other)

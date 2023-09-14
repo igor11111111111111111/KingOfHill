@@ -28,7 +28,7 @@ namespace KingOfHill
             {
                 if (_target == null)
                     break;
-                _enemyPool.Get().Init(_target);
+                _enemyPool.Get().SetStartParameters(_target);
                 yield return new WaitForSeconds(_cdTime);
             }
         }

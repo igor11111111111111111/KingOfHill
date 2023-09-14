@@ -8,16 +8,15 @@ namespace KingOfHill
 {
     public class MoveStairsSystem : MonoBehaviour
     {
-        [SerializeField]
-        private Rung _rungPrefab;
         private List<Rung> _allRungs;
 
         public void Init(PlayerTrigger trigger)
         {
             _allRungs = new List<Rung>();
+            var rungPrefab = Resources.Load<Rung>(nameof(Rung));
             for (int i = 0; i < 13; i++)
             {
-                var rung = Instantiate(_rungPrefab, new Vector3(-i, i, 0), Quaternion.identity, transform);
+                var rung = Instantiate(rungPrefab, new Vector3(-i, i, 0), Quaternion.identity, transform);
                 _allRungs.Add(rung);
             }
 

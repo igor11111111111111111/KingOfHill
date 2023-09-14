@@ -13,20 +13,21 @@ namespace CustomJson
         public void Save<T>(T data) where T : ISaveData
         {
             string contents = JsonConvert.SerializeObject(data, Formatting.Indented);
-            string path = Application.persistentDataPath + "/Score.json";
-            File.WriteAllText(path, contents);
+            File.WriteAllText(GetPath<T>(), contents);
         }
 
         public T Load<T>() where T : ISaveData
         {
-            string path = Application.persistentDataPath + "/Score.json";
-
+            string path = GetPath<T>();
             if (!File.Exists(path))
                 return default(T);
-
             string json = File.ReadAllText(path);
-
             return JsonConvert.DeserializeObject<T>(json);
+        }
+
+        private string GetPath<T>() where T : ISaveData
+        {
+            return Application.persistentDataPath + "/" + typeof(T).Name + ".json";
         }
     }
 }

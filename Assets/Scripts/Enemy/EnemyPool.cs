@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace KingOfHill
 {
@@ -54,7 +55,7 @@ namespace KingOfHill
         private Enemy Create()
         {
             var enemy = Object.Instantiate(_prefab, _parent);
-            enemy.gameObject.SetActive(false);
+            enemy.Init();
             _enemys.Add(enemy);
             return enemy;
         }

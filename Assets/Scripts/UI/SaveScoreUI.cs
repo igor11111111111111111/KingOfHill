@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,15 +13,15 @@ namespace KingOfHill
         private TMP_InputField _inputField;
         [SerializeField]
         private Button _accept;
-        
-        public void Init()
+
+        public void Init(GameOverUI gameOverUI)
         {
             SetActive(false);
+
+            gameOverUI.OnSaveClick += () => ShowPanel(null);
+
             _accept.onClick.AddListener(() =>
-            {
-                OnEnterName?.Invoke(_inputField.text);
-                SetActive(false);
-            });
+            ClosePanel(_accept, () => OnEnterName?.Invoke(_inputField.text)));
         }
     }
 } 
