@@ -15,7 +15,7 @@ namespace KingOfHill
         private Button _exit;
         public Action OnExit;
 
-        public void Init(MenuUI menuUI)
+        public void Init(MenuUI menuUI, SoundManager soundManager)
         {
             SetActive(false);
             var json = new Json();
@@ -24,10 +24,10 @@ namespace KingOfHill
             _sound.value = data.SoundsVolume;
 
             _music.onValueChanged.AddListener((value) =>
-            SoundManager.Instance.SetMusicVolume(value));
+            soundManager.SetMusicVolume(value));
 
             _sound.onValueChanged.AddListener((value) =>
-            SoundManager.Instance.SetSoundVolume(value));
+            soundManager.SetSoundVolume(value));
 
             menuUI.OnOpenSettings += () => ShowPanel(null);
 

@@ -2,37 +2,25 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Audio;
+using Zenject;
 
 namespace KingOfHill
 {
     public class SoundManager : MonoBehaviour
     {
-        public static SoundManager Instance {get; private set; }
         private AudioSource _audio;
         [SerializeField]
         private AudioMixerGroup _audioMixerGroup;
-        private void Awake()
-        {
 
-        }
-        public async void Init()
+        [Inject]
+        private async void Init()
         {
-            if (Instance == null)
-            {
-                DontDestroyOnLoad(this);
-                Instance = this;
-                _audio = GetComponent<AudioSource>();
-
-                await Task.Delay(100); // Для обхода древнего бага самой юнити AudioMixerGroup не поставит значение из условного Awake
-                var data = LoadData();
-                SetMusicVolume(data.MusicVolume);
-                SetSoundVolume(data.SoundsVolume);
-                _audio.Play();
-            }
-            else
-            {
-                Destroy(this);
-            }
+            _audio = GetComponent<AudioSource>();
+            var data = LoadData();
+            await Task.Delay(10);
+            SetMusicVolume(data.MusicVolume);
+            SetSoundVolume(data.SoundsVolume);
+            _audio.Play();
         }
 
         private SettingsSaveData LoadData()
@@ -49,7 +37,7 @@ namespace KingOfHill
 
         public void SetSoundVolume(float value)
         {
-            SetVolume("Sound", value);
+            SetVolume("Sounds", value);
         }
 
         private void SetVolume(string name, float value)

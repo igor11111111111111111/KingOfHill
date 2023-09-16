@@ -1,13 +1,15 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace KingOfHill
 {
     public class EnemyDeathArea : MonoBehaviour
     {
-        public void Init(PlayerTrigger trigger, MoveStairsSystem stairs)
+        [Inject]
+        private void Init(Player player, MoveStairsSystem stairs)
         {
-            trigger.OnLandedNewRung += () =>
+            player.Trigger.OnLandedNewRung += () =>
             {
                 transform.position = stairs.GetLowerPoint() + new Vector3(1, -2f, 0);
             };

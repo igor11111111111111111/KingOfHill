@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace KingOfHill
 {
@@ -13,7 +14,8 @@ namespace KingOfHill
         public PlayerTrigger Trigger => _trigger;
         private PlayerTrigger _trigger;
 
-        public Player Init(IInputSystem inputSystem)
+        [Inject]
+        private void Init(IInputSystem inputSystem)
         {
             _rigidbody = GetComponent<Rigidbody>();
 
@@ -33,8 +35,6 @@ namespace KingOfHill
                 _particle.Play();
                 Destroy(gameObject);
             };
-
-            return this;
         }
     }
 }

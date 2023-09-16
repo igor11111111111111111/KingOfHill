@@ -1,35 +1,32 @@
 ﻿using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace KingOfHill
 {
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawner
     {
         private EnemyPool _enemyPool;
-        private float _cdTime;
+        private int _cdTime = 2000;
         private Transform _target;
 
-        public EnemySpawner Init(EnemyPool enemyPool, Transform target)
+        [Inject]
+        public void Init(EnemyPool enemyPool, Player player)
         {
             _enemyPool = enemyPool;
-            _target = target;
-            _cdTime = 2f;
-            return this;
+            _target = player.transform;
+            SpawnLoop();
         }
 
-        public void StartSpawn()
-        {
-            StartCoroutine(nameof(SpawnLoop));
-        }
-
-        private IEnumerator SpawnLoop()
+        private async void SpawnLoop()
         {
             while (true)
             {
                 if (_target == null)
                     break;
                 _enemyPool.Get().SetStartParameters(_target);
-                yield return new WaitForSeconds(_cdTime);
+                await Task.Delay(_cdTime);
             }
         }
     }

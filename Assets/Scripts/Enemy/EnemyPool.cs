@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
+using Zenject;
 
 namespace KingOfHill
 {
@@ -11,15 +12,18 @@ namespace KingOfHill
         private Enemy _prefab;
         private Transform _parent;
         private MoveStairsSystem _stairs;
+        private int _startSize = 5;
 
-        public EnemyPool(Enemy prefab, int size, Transform parent, MoveStairsSystem stairs)
+        [Inject]
+        public void Init(MoveStairsSystem stairs, [Inject(Id = SceneMonoInstaller.ID.EnemyParent)] Transform parent)
         {
+            var prefab = Resources.Load<Enemy>(nameof(Enemy));
             _enemys = new List<Enemy>();
             _prefab = prefab;
             _parent = parent;
             _stairs = stairs;
 
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < _startSize; i++)
             {
                 Create();
             }

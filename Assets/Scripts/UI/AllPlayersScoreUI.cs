@@ -14,13 +14,13 @@ namespace KingOfHill
         [SerializeField]
         private Button _restart;
 
-        public void Init(SaveScoreUI saveScoreUI)
+        public void Init(ScoreSaveSystem scoreSaveSystem)
         {
             SetActive(false);
 
             _playerScoreCellPrefab = Resources.Load<PlayerScoreCell>(nameof(PlayerScoreCell));
 
-            saveScoreUI.OnEnterName += (_) => ShowPanel(() => Show());
+            scoreSaveSystem.OnSaved += () => ShowPanel(() => Show());
 
             _restart.onClick.AddListener(() =>
             ClosePanel(_restart, () => new SceneChanger(Scenes.Game)));

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace KingOfHill
 {
@@ -23,15 +24,16 @@ namespace KingOfHill
         [SerializeField]
         private SettingsUI _settingsUI;
 
-        public void Init(PlayerTrigger trigger, ScoreData scoreData)
+        [Inject]
+        private void Init(Player player, ScoreData scoreData, SoundManager soundManager, ScoreSaveSystem scoreSaveSystem)
         {
-            _gameOverUI.Init(trigger, scoreData);
+            _gameOverUI.Init(player.Trigger, scoreData);
             _saveScoreUI.Init(_gameOverUI);
-            _allPlayersScoreUI.Init(_saveScoreUI);
-            _settingsUI.Init(_menuUI);
+            _allPlayersScoreUI.Init(scoreSaveSystem);
+            _settingsUI.Init(_menuUI, soundManager);
             _menuUI.Init(_settingsUI);
 
-            GetComponent<UISoundSystem>().Init(trigger);
+            GetComponent<UISoundSystem>().Init(player.Trigger);
         }
     } 
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace KingOfHill
 {
@@ -10,7 +11,8 @@ namespace KingOfHill
     {
         private List<Rung> _allRungs;
 
-        public void Init(PlayerTrigger trigger)
+        [Inject]
+        private void Init(Player player)
         {
             _allRungs = new List<Rung>();
             var rungPrefab = Resources.Load<Rung>(nameof(Rung));
@@ -19,8 +21,7 @@ namespace KingOfHill
                 var rung = Instantiate(rungPrefab, new Vector3(-i, i, 0), Quaternion.identity, transform);
                 _allRungs.Add(rung);
             }
-
-            trigger.OnLandedNewRung += Move;
+            player.Trigger.OnLandedNewRung += Move;
         }
 
         private void Move()

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace KingOfHill
 {
@@ -8,10 +9,11 @@ namespace KingOfHill
         private Camera _camera;
         private Vector3 _offset = new Vector3(6, 5, 4.5f);
 
-        public void Init(Transform target, Camera camera)
+        [Inject]
+        public void Init(Player player, Camera camera)
         {
-            _target = target;
             _camera = camera;
+            _target = player.transform;
         }
 
         private void Update()

@@ -1,16 +1,18 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace KingOfHill
 {
     public class ScoreRefreshSystem
     {
-        public ScoreRefreshSystem(ScoreData data, PlayerTrigger trigger, CurrentScoreUI uI)
+        [Inject]
+        private void Init(ScoreData data, Player player, UI ui)
         {
-            trigger.OnLandedNewRung += () =>
+            player.Trigger.OnLandedNewRung += () =>
             {
                 data.Value++;
-                uI.Refresh(data.Value);
+                ui.CurrentScoreUI.Refresh(data.Value);
             };
         }
     }
